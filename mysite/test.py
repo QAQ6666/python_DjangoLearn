@@ -1,10 +1,9 @@
-def isPrime(n):
-    l = list(range(1, n + 1))
-    l[0] = 0
-    for i in range(2, n + 1):
-        if l[i - 1] != 0:
-            for j in range(i * 2, n + 1, i):
-                l[j - 1] = 0
-    result = [x for x in l if x != 0]
-    return result
-print(isPrime(100))
+def fib(n):
+    if n > 1:
+        return fib(n-1)+fib(n-2)
+    if n :
+        return 1
+    if n == 0:
+        return 0
+n=int(input("输入一个数n="))
+print('n={0}，fib（{0}）={1}'.format(n,fib(n)))
