@@ -3,8 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 #from .forms import LoginForm, RegistrationForm, UserProfileForm, UserInfoForm, UserForm
-#from .models import UserProfile, UserInfo
-#from django.contrib.auth.models import User
+from .models import UserProfile, UserInfo
+from django.contrib.auth.models import User
 #from django.core.urlresolvers import reverse
 from .forms import LoginForm,RegistrationForm , UserProfileForm
 
@@ -61,12 +61,12 @@ def register(request):
         userprofile_form = UserProfileForm()
         return render(request, "account/register.html", {"form": user_form, "profile":userprofile_form})
 
-# @login_required(login_url='/account/login/')
-# def myself(request):
-#     user = User.objects.get(username=request.user.username)
-#     userprofile = UserProfile.objects.get(user=user)
-#     userinfo = UserInfo.objects.get(user=user)
-#     return render(request, "account/myself.html", {"user":user, "userinfo":userinfo, "userprofile":userprofile})
+@login_required()
+def myself(request):
+    userprofile = UserProfile.objects.get(user=request.user) if hasattr(request.user,'userprofile') else UserProfile.objects.create(user=request.user)
+
+    userinfo = UserInfo.objects.get(user=request.user) if hasattr(request.user,'userinfo') else UserInfo.objects.create(user=request.user)
+    return render(request, "account/myself.html", {"user":request.user, "userinfo":userinfo, "userprofile":userprofile})
 #
 # @login_required(login_url='/account/login/')
 # def myself_edit(request):
