@@ -1,9 +1,20 @@
-def fib(n):
-    if n > 1:
-        return fib(n-1)+fib(n-2)
-    if n :
-        return 1
-    if n == 0:
-        return 0
-n=int(input("输入一个数n="))
-print('n={0}，fib（{0}）={1}'.format(n,fib(n)))
+import random
+def hongbaoRun(total,num):
+    each=[]
+    already=0
+    for i in range(1,num):
+        t = random.uniform(0.01, total-already)
+        t = round(t, 2)
+#为当前抢红包的人随机分配金额
+#至少给剩下的人每人留一分钱
+        each.append(t)
+        already += t
+
+    each.append(round(total - already, 2))
+    return each
+
+def hongbao(t,n):
+    each=hongbaoRun(t,n)
+    #print('第{}种随机分配方案：'.format(i+1),end="")
+    print(each)
+
