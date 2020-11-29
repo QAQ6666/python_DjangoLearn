@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.clickjacking import xframe_options_deny, xframe_options_exempt
+
 from .models import UserProfile, UserInfo
 from django.contrib.auth.models import User
 #from django.core.urlresolvers import reverse
@@ -103,6 +105,7 @@ def myself_edit(request):
 
 
 @login_required(login_url='/account/login/')
+@xframe_options_exempt
 def my_image(request):
     if request.method == 'POST':
         img = request.POST['img']
