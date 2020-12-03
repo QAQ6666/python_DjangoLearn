@@ -6,7 +6,9 @@ app_name = "article"
 
 urlpatterns = [
     path('article-column/',views.article_column,name = "article_column"),
-    path('rename-column/',views.rename_article_column,name='rename_article_column')
+    path('rename-column/',views.rename_article_column,name='rename_article_column'),
+    path('article-post/', views.article_post, name='article_post')
+
     #url(r'^article-column/$', views.article_column, name="article_column"),
     # url(r'^rename-column/$', views.rename_article_column, name="rename_article_column"),
     # url(r'^del-column/$', views.del_article_column, name="del_article_column"),
