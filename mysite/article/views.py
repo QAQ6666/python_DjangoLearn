@@ -92,31 +92,31 @@ def article_post(request):
         #article_tags = request.user.tag.all()
         return render(request, "article/column/article_post.html", {"article_post_form":article_post_form, "article_columns":article_columns, })#"article_tags":article_tags})
 
+
+@login_required(login_url='/account/login')
+def article_list(request):
+    articles = ArticlePost.objects.filter(author=request.user)
+    return render(request, "article/column/article_list.html", {"articles":articles})
+    # articles_list = ArticlePost.objects.filter(author=request.user)
+    # paginator = Paginator(articles_list, 2)
+    # page = request.GET.get('page')
+    # try:
+    #     current_page = paginator.page(page)
+    #     articles = current_page.object_list
+    # except PageNotAnInteger:
+    #     current_page = paginator.page(1)
+    #     articles = current_page.object_list
+    # except EmptyPage:
+    #     current_page = paginator.page(paginator.num_pages)
+    #     articles = current_page.object_list
+    # return render(request, "article/column/article_list.html", {"articles":articles, "page": current_page})
+
 #
-# @login_required(login_url='/account/login')
-# def article_list(request):
-#     #articles = ArticlePost.objects.filter(author=request.user)
-#     #return render(request, "article/column/article_list.html", {"articles":articles})
-#     articles_list = ArticlePost.objects.filter(author=request.user)
-#     paginator = Paginator(articles_list, 2)
-#     page = request.GET.get('page')
-#     try:
-#         current_page = paginator.page(page)
-#         articles = current_page.object_list
-#     except PageNotAnInteger:
-#         current_page = paginator.page(1)
-#         articles = current_page.object_list
-#     except EmptyPage:
-#         current_page = paginator.page(paginator.num_pages)
-#         articles = current_page.object_list
-#     return render(request, "article/column/article_list.html", {"articles":articles, "page": current_page})
-#
-#
-# @login_required(login_url='/account/login')
-# def article_detail(request, id, slug):
-#     article = get_object_or_404(ArticlePost, id=id, slug=slug)
-#     return render(request, "article/column/article_detail.html", {"article":article})
-#
+@login_required(login_url='/account/login')
+def article_detail(request, id, slug):
+    article = get_object_or_404(ArticlePost, id=id, slug=slug)
+    return render(request, "article/column/article_detail.html", {"article":article})
+
 # @login_required(login_url='/account/login')
 # @require_POST
 # @csrf_exempt
