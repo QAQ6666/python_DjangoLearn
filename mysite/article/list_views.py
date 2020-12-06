@@ -41,8 +41,8 @@ def article_titles(request, username=None):
     except EmptyPage:
         current_page = paginator.page(paginator.num_pages)
         articles = current_page.object_list
-    # if username:
-    #     return render(request, "article/list/author_articles.html", {"articles":articles, "page":current_page, "userinfo":userinfo, "user":user})
+    if username:
+        return render(request, "article/list/author_articles.html", {"articles":articles, "page":current_page, "userinfo":userinfo, "user":user})
 
     return render(request, "article/list/article_titles.html", {"articles":articles, "page": current_page})
 

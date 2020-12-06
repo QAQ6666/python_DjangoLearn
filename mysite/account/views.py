@@ -6,7 +6,7 @@ from django.views.decorators.clickjacking import xframe_options_deny, xframe_opt
 
 from .models import UserProfile, UserInfo
 from django.contrib.auth.models import User
-#from django.core.urlresolvers import reverse
+from django.urls import reverse
 from .forms import LoginForm,RegistrationForm , UserProfileForm, UserInfoForm, UserForm
 
 
@@ -54,8 +54,8 @@ def register(request):
             new_profile.user = new_user
             new_profile.save()
             #UserInfo.objects.create(user=new_user)
-            return HttpResponse("successfully")
-            #return HttpResponseRedirect(reverse("account:user_login"))
+            # return HttpResponse("successfully")
+            return HttpResponseRedirect(reverse("account:user_login"))
         else:
             return HttpResponse("sorry, your can not register.")
     else:
