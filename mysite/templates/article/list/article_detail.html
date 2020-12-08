@@ -13,13 +13,13 @@
     <header>
         <h1>{{ article.title }}</h1>
         <p>
-{#            <a href="{% url 'article:author_articles' article.author.username %}">#}
-{#                {{ article.author.username }}#}
-{#            </a>#}
+            <a href="{% url 'article:author_articles' article.author.username %}">
+                {{ article.author.username }}
+            </a>
             <span style="margin-left:20px" class="glyphicon glyphicon-thumbs-up">{{ total_likes }}like{{ total_likes | pluralize }}</span>
             <span style="margin-left: 20px">{{ total_views }}view{{ total_views | pluralize }}</span>
         </p>
-        <p> <span style="margin-right: 10px"><strong>Tags:</strong></span> {{ article.article_tag.all | join:", "}}</p>
+{#        <p> <span style="margin-right: 10px"><strong>Tags:</strong></span> {{ article.article_tag.all | join:", "}}</p>#}
     </header>
 
     <link rel="stylesheet" href="{% static 'editor/css/editormd.preview.css' %}" />
@@ -78,17 +78,17 @@
 {#    </div>#}
 
 </div>
-{#<div class="col-md-3">#}
-{#    <p class="text-center"><h3>最受欢迎文章</h3></p>#}
-{#    <ol>#}
-{#        {% for article_rank in most_viewed %}#}
-{#        <li>#}
-{#            <a href="{{article_rank.get_url_path}}">{{ article_rank.title }}</a>#}
-{#        </li>#}
-{#        {% endfor %}#}
-{#    </ol>#}
-{#    <hr>#}
-{#    <p class="text-center"><h3>最新文章</h3></p>#}
+<div class="col-md-3">
+    <p class="text-center"><h3>最受欢迎文章</h3></p>
+    <ol>
+        {% for article_rank in most_viewed %}
+        <li>
+            <a href="{{article_rank.get_url_path}}">{{ article_rank.title }}</a>
+        </li>
+        {% endfor %}
+    </ol>
+    <hr>
+    <p class="text-center"><h3>最新文章</h3></p>
 {#    <div>{% latest_articles 4 %}</div>#}
 {##}
 {#    <hr>#}
@@ -111,7 +111,7 @@
 {#        <p>Sorry, 没有相似文章</p>#}
 {#        {% endfor %}#}
 {#    </div>#}
-{#</div>#}
+</div>
 
 </div>
 <script src='{% static "js/jquery.js" %}'></script>
@@ -120,7 +120,7 @@
 <script src='{% static "editor/lib/raphael.min.js" %}'></script>
 <script src='{% static "editor/lib/underscore.min.js" %}'></script>
 <script src='{% static "editor/lib/sequence-diagram.min.js" %}'></script>
-{#<script src='{% static "editor/lib/flowchart.min.js" %}''></script>#}
+<script src='{% static "editor/lib/flowchart.min.js" %}'></script>
 <script src='{% static "editor/lib/jquery.flowchart.min.js" %}'></script>
 <script src='{% static "editor/editormd.js" %}'></script>
 <script type="text/javascript" src="{% static 'js/layer.js'%}"></script>

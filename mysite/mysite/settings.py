@@ -135,3 +135,18 @@ EMAIL_HOST = 25
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'your_acount@163.com'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             "CONNECTION_POOL_KWARGS": {"max_connections": 100},
+#             "PASSWORD": "123456",
+#         }
+#     }
+# }

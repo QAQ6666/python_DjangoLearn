@@ -12,10 +12,10 @@ from .models import ArticleColumn, ArticlePost#, Comment
 from django.http import HttpResponse
 from django.db.models import Count
 
-# import redis
+import redis
 from django.conf import settings
 
-# r = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+r = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB,password='123456')
 
 
 def article_titles(request, username=None):
@@ -49,14 +49,20 @@ def article_titles(request, username=None):
 
 def article_detail(request, id, slug):
     article = get_object_or_404(ArticlePost, id=id, slug=slug)
-    return  render(request,"article/list/article_detail.html",{'article':article})
-#     total_views = r.incr("article:{}:views".format(article.id))
-#     r.zincrby('article_ranking', article.id, 1)
+
+    total_views = r.incr("article:{}:views".format(article.id))
+    r.zincrby('article_ranking', article.id, 1)
 #
-#     article_ranking = r.zrange('article_ranking', 0, -1, desc=True)[:10]
-#     article_ranking_ids = [int(id) for id in article_ranking]
-#     most_viewed = list(ArticlePost.objects.filter(id__in=article_ranking_ids))
-#     most_viewed.sort(key=lambda x: article_ranking_ids.index(x.id))
+    article_ranking = r.zrange('article_ranking', 0, -1, desc=True)[:10]
+
+    article_ranking_ids = [int(id) for id in article_ranking]
+
+    most_viewed = list(ArticlePost.objects.filter(id__in=article_ranking_ids))
+    print(most_viewed)
+    most_viewed.sort(key=lambda x: article_ranking_ids.index(x.id))
+    print(most_viewed)
+    return  render(request,"article/list/article_detail.html",{'article':article,'total_views':total_views,"most_viewed": most_viewed})
+
 #
 #     if request.method == "POST":
 #         comment_form = CommentForm(data=request.POST)
